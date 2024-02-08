@@ -100,6 +100,14 @@ impl Default for Options {
     }
 }
 
+// keyword_syntax: KeywordSyntax::ColonPrefix,
+// nil_syntax: NilSyntax::Symbol,
+// bool_syntax: BoolSyntax::Symbol,
+// vector_syntax: VectorSyntax::Brackets,
+// bytes_syntax: BytesSyntax::Elisp,
+// string_syntax: StringSyntax::Elisp,
+// char_syntax: CharSyntax::Elisp,
+
 /// How to print the special nil value.
 #[derive(Debug, Clone, Copy)]
 pub enum NilSyntax {
@@ -325,7 +333,8 @@ pub trait Formatter {
     where
         W: io::Write + ?Sized,
     {
-        writer.write_all(b"#:")?;
+        //TODO it's here
+        writer.write_all(b":")?;
         writer.write_all(name.as_bytes())
     }
 
