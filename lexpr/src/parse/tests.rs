@@ -12,7 +12,7 @@ fn test_atoms_default() {
         Parser::from_str("foo-symbol :prefix-keyword postfix-keyword: #t #f #nil 100 -42 4.5");
     for value in vec![
         Value::symbol("foo-symbol"),
-        Value::symbol(":prefix-keyword"),
+        Value::keyword("prefix-keyword"),
         Value::symbol("postfix-keyword:"),
         Value::from(true),
         Value::from(false),
@@ -531,7 +531,7 @@ fn test_atoms_location_info() {
     );
     for (value, start, end) in vec![
         (Value::symbol("foo-symbol"), (1, 0), (1, 10)),
-        (Value::symbol(":prefix-keyword"), (1, 11), (1, 26)),
+        (Value::keyword("prefix-keyword"), (1, 11), (1, 26)),
         (Value::symbol("postfix-keyword:"), (1, 27), (1, 43)),
         (Value::from(true), (2, 0), (2, 2)),
         (Value::from(false), (2, 3), (2, 5)),

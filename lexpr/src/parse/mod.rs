@@ -224,7 +224,7 @@ impl Default for Options {
     /// - Brackets are treated just like parentheses, i.e. indicating a list.
     fn default() -> Self {
         Options {
-            keyword_syntaxes: KeywordSyntax::Octothorpe.to_flag(),
+            keyword_syntaxes: KeywordSyntax::Octothorpe.to_flag() | KeywordSyntax::ColonPrefix.to_flag(),
             nil_symbol: NilSymbol::Default,
             t_symbol: TSymbol::Default,
             brackets: Brackets::List,
