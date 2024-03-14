@@ -29,7 +29,7 @@ fn test_symbol() {
     check_roundtrip_default(sexp!(#"$?:!"), "$?:!");
 }
 
-static SPECIAL_INITIALS: &str = "!$%&*/:<=>?@^_~";
+static SPECIAL_INITIALS: &str = "!$%&*/<=>?@^_~";
 
 #[test]
 fn test_special_symbols() {
@@ -48,8 +48,10 @@ fn test_peculiar_symbols() {
 
 #[test]
 fn test_keyword_default() {
-    check_roundtrip_default(sexp!(#:foo), "#:foo");
-    check_roundtrip_default(sexp!(#:"kebab-keyword"), "#:kebab-keyword");
+    check_roundtrip_default(sexp!(#:foo), ":foo");
+    check_roundtrip_default(sexp!(:foo), ":foo");
+    check_roundtrip_default(sexp!(:"kebab-keyword"), ":kebab-keyword");
+    check_roundtrip_default(sexp!(#:"kebab-keyword"), ":kebab-keyword");
 }
 
 #[test]
