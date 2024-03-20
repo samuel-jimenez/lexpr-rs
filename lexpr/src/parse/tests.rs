@@ -2,7 +2,6 @@
 
 use super::*;
 use crate::parse::error::Category;
-use crate::Value;
 
 use std::io::Cursor;
 
@@ -338,6 +337,22 @@ fn test_lists_default() {
     assert_eq!(
         from_str("(1 hello . 2)").unwrap(),
         Value::append(vec![Value::from(1), Value::symbol("hello")], Value::from(2))
+    );
+    assert_eq!(
+        from_str("(foo bar)").unwrap(),
+        Value::list(vec![Value::symbol("foo"), Value::symbol("bar")])
+    );
+    assert_eq!(
+        from_str("(.foo bar)").unwrap(),
+        Value::list(vec![Value::symbol(".foo"), Value::symbol("bar")])
+    );
+    assert_eq!(
+        from_str("(.dot bar)").unwrap(),
+        Value::list(vec![Value::symbol(".dot"), Value::symbol("bar")])
+    );
+    assert_eq!(
+        from_str("(foo .bar)").unwrap(),
+        Value::list(vec![Value::symbol("foo"), Value::symbol(".bar")])
     );
 }
 
