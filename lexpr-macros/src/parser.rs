@@ -199,6 +199,7 @@ fn parse_list(tokens: TokenStream) -> Result<Value, ParseError> {
     while let Some(token) = parser.peek() {
         if let TokenTree::Punct(punct) = token {
             if punct.as_char() == '.' {
+                //TODO check we are actually done
                 if tail.is_some() {
                     return Err(ParseError::UnexpectedChar('.'));
                 }
