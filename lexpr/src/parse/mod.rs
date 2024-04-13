@@ -911,9 +911,11 @@ impl<'de, R: Read<'de>> Parser<R> {
                                 pair = pair.cdr_mut().as_cons_mut().unwrap();
                             }
                             pair.set_car(Value::symbol(self.parse_symbol_suffix(".")?));
-                            println!("warning:[lexpr] using .SYMBOL format can cause errors if used with sexp. \nExplicitly using either #\"{:}\" or ( . {:}) is recommended", pair.car(), &pair.car().to_string()[1..]);
-                            println!("{:}", std::backtrace::Backtrace::capture());
-
+                            #[cfg(debug_assertions)]
+                            {
+                                log::warn!("warning:[lexpr] using .SYMBOL format can cause errors if used with sexp. \nExplicitly using either #\"{:}\" or ( . {:}) is recommended", pair.car(), &pair.car().to_string()[1..]);
+                                log::warn!("{:}", std::backtrace::Backtrace::capture());
+                            }
                             have_value = true;
                         }
                     }

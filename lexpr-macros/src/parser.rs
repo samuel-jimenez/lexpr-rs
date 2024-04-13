@@ -2,6 +2,7 @@ use std::fmt;
 
 use crate::value::Value;
 
+// use proc_macro::Level::Warning;
 use proc_macro2::{Delimiter, Literal, Spacing, TokenStream, TokenTree};
 
 #[derive(Debug)]
@@ -205,6 +206,11 @@ fn parse_list(tokens: TokenStream) -> Result<Value, ParseError> {
                 }
                 parser.eat_token();
                 tail = Some(parser.parse()?);
+                //TODO check for Value::Symbol
+                // https://doc.rust-lang.org/proc_macro/struct.Diagnostic.html
+                // https://users.rust-lang.org/t/compile-warning-macro/107510/4
+                // proc_macro::Diagnostic::new(proc_macro::Level::Warning, format!("warning:[lexpr] using .SYMBOL format can cause errors if used with sexp. \nExplicitly using either #\"{:?}\" or ( . {:?}) is recommended", tail, tail));
+                // println!("warning:[lexpr] using .SYMBOL format can cause errors if used with sexp. \nThis was parsed as ( . {:?}). Did you mean #\".{:?}\"?", tail, tail);
                 continue;
             }
         }
