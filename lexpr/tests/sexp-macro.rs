@@ -51,7 +51,7 @@ fn test_cons() {
 #[test]
 fn test_macro_equivalence() {
     assert_eq!(from_str("(foo bar)").unwrap(), sexp!((foo bar)));
-    assert_eq!(from_str("(foo . bar)").unwrap(), sexp!((foo . bar)));
+    assert_eq!(from_str("(foo . bar)").unwrap(), sexp!((foo.bar)));
     assert_eq!(from_str("(.foo bar)").unwrap(), sexp!((#".foo" bar)));
     // assert_eq!(from_str("(.foo bar)").unwrap(), sexp!((.foo bar)));
     // assert_eq!(from_str("(foo .bar)").unwrap(), sexp!((foo .bar)));
