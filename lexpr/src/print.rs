@@ -325,7 +325,8 @@ pub trait Formatter {
     where
         W: io::Write + ?Sized,
     {
-        writer.write_all(b"#:")?;
+        //TODO it's here
+        writer.write_all(b":")?;
         writer.write_all(name.as_bytes())
     }
 

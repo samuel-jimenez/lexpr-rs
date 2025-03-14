@@ -1,4 +1,4 @@
-use lexpr::Value;
+use lexpr::{from_str, Value};
 use lexpr_macros::sexp;
 
 #[test]
@@ -46,6 +46,15 @@ fn test_cons() {
         sexp!((:foo)),
         Value::cons(Value::keyword("foo"), Value::Null)
     );
+}
+
+#[test]
+fn test_macro_equivalence() {
+    assert_eq!(from_str("(foo bar)").unwrap(), sexp!((foo bar)));
+    assert_eq!(from_str("(foo . bar)").unwrap(), sexp!((foo.bar)));
+    assert_eq!(from_str("(.foo bar)").unwrap(), sexp!((#".foo" bar)));
+    // assert_eq!(from_str("(.foo bar)").unwrap(), sexp!((.foo bar)));
+    // assert_eq!(from_str("(foo .bar)").unwrap(), sexp!((foo .bar)));
 }
 
 #[test]
